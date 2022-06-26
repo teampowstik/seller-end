@@ -28,8 +28,10 @@ def createApp(configClass=Config):
     from flaskFile.product.routes import product
     app.register_blueprint(product)
 
-    return app
+    with app.app_context():
+        db.create_all()
 
+    return app
 
 
 

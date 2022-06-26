@@ -2,7 +2,6 @@ from flask import url_for, redirect, render_template, flash, request, Blueprint
 from flask_login import login_required, current_user, login_user, logout_user
 from flaskFile.models import User
 from flaskFile import db, bcrypt
-from flaskFile.user.utils import save_picture, sendEmail
 from flaskFile.user.forms import (RegistrationForm, LoginForm) 
 
 user = Blueprint('user', __name__)

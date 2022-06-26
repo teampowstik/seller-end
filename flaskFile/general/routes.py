@@ -7,6 +7,6 @@ general = Blueprint('general', __name__)
 def home():
     return render_template('general/home.html', title="Powstik-Seller-Portal")
 
-@general.app_errorhandler(Exception)
-def errorHandler(Exception):
-    return render_template ("general/error.html", title="Error")
+# @general.app_errorhandler(Exception)
+# def errorHandler(Exception):
+#     return render_template ("general/error.html", title="Error")

@@ -145,3 +145,13 @@ footer {
   background-color: #059b9b;
   display: inline-block;
 }
+
+.image-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-box {
+  height: 200px;
+  width: max-width;
+}

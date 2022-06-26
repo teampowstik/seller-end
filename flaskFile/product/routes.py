@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from flaskFile.models import Product as PD
 from flaskFile import db
 from flaskFile.product.forms import Product
+from flaskFile import utils
 
 product = Blueprint('product', __name__)
 
@@ -12,6 +13,12 @@ def uploadProduct():
     form = Product()
     if form.validate_on_submit():
         try: 
+            print("\n\n\n", form.image_1, "\n\n\n")
+            image_1_url = utils.save_picture(form.image_1.data)
+            image_2_url = utils.save_picture(form.image_2.data)
+            image_3_url = utils.save_picture(form.image_3.data)
+            image_4_url = utils.save_picture(form.image_4.data)
+
             product = PD(name=form.name.data,\
                 description=form.description.data,\
                     userId=current_user.id,\
@@ -19,7 +26,11 @@ def uploadProduct():
                             mrp=form.mrp.data,\
                                 selling_price=form.selling_price.data,\
                                     shipping_cost=form.shipping_cost.data,\
-                                        bulk_pricing=form.bulk_pricing.data\
+                                        bulk_pricing=form.bulk_pricing.data,\
+                                            image_1 = image_1_url,\
+                                                image_2 = image_2_url,\
+                                                    image_3 = image_3_url,\
+                                                        image_4 = image_4_url
                 )
             db.session.add(product)
             db.session.commit()

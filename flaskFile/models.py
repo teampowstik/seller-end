@@ -40,6 +40,11 @@ class Product(db.Model):
     shipping_cost = db.Column(db.Integer, nullable=False)
     bulk_pricing = db.Column(db.Integer, nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    image_1 = db.Column(db.String(40), nullable=False)
+    image_2 = db.Column(db.String(40), nullable=False)
+    image_3 = db.Column(db.String(40), nullable=False)
+    image_4 = db.Column(db.String(40), nullable=False)
+
     
     def __repr__(self):
         return f"UserRide('{self.userId}','{self.name}', '{self.id}')"
