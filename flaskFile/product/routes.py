@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, Blueprint
+from flask import flash, render_template, redirect, url_for, Blueprint
 from flask_login import login_required, current_user
 from flaskFile.models import Product as PD
 from flaskFile import db
@@ -13,11 +13,10 @@ def uploadProduct():
     form = Product()
     if form.validate_on_submit():
         try: 
-            print("\n\n\n", form.image_1, "\n\n\n")
-            image_1_url = utils.save_picture(form.image_1.data)
-            image_2_url = utils.save_picture(form.image_2.data)
-            image_3_url = utils.save_picture(form.image_3.data)
-            image_4_url = utils.save_picture(form.image_4.data)
+            image_1_url = utils.get_image_url(utils.save_image(form.image_1.data))
+            image_2_url = utils.get_image_url(utils.save_image(form.image_2.data))
+            image_3_url = utils.get_image_url(utils.save_image(form.image_3.data))
+            image_4_url = utils.get_image_url(utils.save_image(form.image_4.data))
 
             product = PD(name=form.name.data,\
                 description=form.description.data,\
@@ -34,6 +33,8 @@ def uploadProduct():
                 )
             db.session.add(product)
             db.session.commit()
+            flash("Thank you for uplaod")
+            return redirect(url_for('general.home'))
         except:
             return redirect(url_for('general.errorHandler'))
     return render_template('product/upload-product.html', title='Find-Product', form=form)

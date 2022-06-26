@@ -1,15 +1,20 @@
 import secrets
-from PIL import Image
 import os
-from flask import current_app
 
-def save_picture(formPicture):
-    random_hex = secrets.token_hex(8)
-    _, fileExt = os.path.splitext(formPicture.filename)
-    pictureName = random_hex + fileExt
-    picturePath = os.path.join(current_app.root_path, 'static\profile_pics', pictureName)
-    outputSize = (256, 256)
-    i = Image.open(formPicture)
-    i.thumbnail(outputSize)
-    i.save(picturePath)
-    return pictureName
+from sqlalchemy import false
+from flaskFile import config
+
+def save_image(formImage):
+    randonHex = secrets.token_hex(8)
+    _, fileExe = os.path.splitext(formImage.filename)
+    imageName = randonHex +  fileExe
+    container_client = config.get_client()
+    container_client.upload_blob(imageName, formImage)
+    return imageName
+
+
+def get_image_url(image_name):
+    container_client = config.get_client()
+    url = container_client.get_blob_client(blob = image_name).url
+    return url
+
