@@ -6,8 +6,8 @@ from flaskFile.user.forms import LoginForm
 
 user = Blueprint('user', __name__)
 
-@user.route("/login/<int:ps_id>", methods=['GET', 'POST'])
-def login(ps_id: int):
+@user.route("/login/<string:ps_id>", methods=['GET', 'POST'])
+def login(ps_id: str):
     if current_user.is_authenticated:
         return redirect(url_for('general.home'))
     form = LoginForm()

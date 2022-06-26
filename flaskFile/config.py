@@ -14,6 +14,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 CONNECTION_STRING = os.getenv('CONNECT_STRING')
 CONTAINER_NAME = os.getenv('CONTAINER_NAME')
 IMAGE_SIZE = os.getenv('IMAGE_SIZE')
+KEY = os.getenv('KEY')
 
 class Config:
     SECRET_KEY = SECRET_KEY
