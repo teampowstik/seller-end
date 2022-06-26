@@ -1,4 +1,5 @@
 from flask import current_app
+from datetime import datetime
 from flaskFile import db, loginManager
 from flask_login import UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
@@ -9,6 +10,8 @@ def loadUser(userId):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
+    ps_id = db.Column(db.Integer, unique=True, nullable=False)
+    username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
 

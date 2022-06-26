@@ -6,13 +6,13 @@ from flaskFile.user.forms import LoginForm
 
 user = Blueprint('user', __name__)
 
-@user.route("/login", methods=['GET', 'POST'])
-def login():
+@user.route("/login/<int:ps_id>", methods=['GET', 'POST'])
+def login(ps_id: int):
     if current_user.is_authenticated:
         return redirect(url_for('general.home'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).filter_by(ps_id = form.id.data).first()
+        user = User.query.filter_by(email=form.email.data).filter_by(ps_id = ps_id).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             flash('Login successful', 'info')
@@ -25,10 +25,20 @@ def login():
 @user.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('user.login'))
+    return redirect(url_for('general.home'))
 
 @user.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
     imageFile = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template('user/account.html', title=current_user.username, imageFile=imageFile)
+
+
+
+
+
+
+
+
+
+

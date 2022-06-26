@@ -9,7 +9,7 @@ mail = Mail()
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 loginManager = LoginManager()
-loginManager.login_view = 'user.login'
+loginManager.login_view = 'general.home'
 loginManager.login_message_category = 'warning'
 
 def createApp(configClass=Config):
