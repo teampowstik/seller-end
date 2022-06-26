@@ -18,9 +18,10 @@ def uploadProduct():
             image_3_url = utils.get_image_url(utils.save_image(form.image_3.data))
             image_4_url = utils.get_image_url(utils.save_image(form.image_4.data))
 
-            product = PD(name=form.name.data,\
+            product = PD(
+                name=form.name.data,\
                 description=form.description.data,\
-                    userId=current_user.id,\
+                    userId=current_user.ps_id,\
                         sku_code=form.sku_code.data,\
                             mrp=form.mrp.data,\
                                 selling_price=form.selling_price.data,\
