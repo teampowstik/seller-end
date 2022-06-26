@@ -27,6 +27,8 @@ def createApp(configClass=Config):
     app.register_blueprint(general)
     from flaskFile.product.routes import product
     app.register_blueprint(product)
+    from flaskFile.admin.routes import admin
+    app.register_blueprint(admin)
 
     with app.app_context():
         db.create_all()

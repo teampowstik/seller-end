@@ -14,7 +14,7 @@ def page_not_found(Exception):
     return redirect(url_for('product.uploadProduct'))
 
 
-@general.app_errorhandler(Exception)
-def errorHandler(Exception):
-    return render_template ("general/error.html", title="Error")
+# @general.app_errorhandler(Exception)
+# def errorHandler(Exception):
+#     return render_template ("general/error.html", title="Error")
 
